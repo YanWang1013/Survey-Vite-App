@@ -4,57 +4,48 @@ networks:
   webapp:
 
 services:
-  my_frontend:
-    container_name: survey_site_nginx
-    image: node:lts
-    working_dir: /var/www/html/app/
-    entrypoint: /bin/bash
-    expose:
-      - 8000
-    volumes:
-      - ./frontend/:/var/www/html/app
-    tty: true
-  nginx:
-    image: nginx:stable-alpine
-    container_name: survey_site_nginx
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    container_name: client
+    image: node:alpine
     ports:
-    - "8000:80"
-    links:
-      - php
+      - "3000:3000"
     volumes:
-      - ./:/var/www/html
-      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf:rw
-      - ./docker/logs/nginx:/var/logs/nginx:rw
-    depends_on:
-      - php
-      - mysql
+      - ./:/var/www/html/vue
+      - /var/www/html/vue/node_modules
     networks:
       - webapp
-  php:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: survey_site_php
+    container_name: server
     volumes:
       - ./:/var/www/html
+      - /var/www/html/vendor
     ports:
-      - "9001:9000"
+      - "8000:8000"
+    depends_on:
+      - "database"
     networks:
       - webapp
 
-  mysql:
+  database:
     image: mysql:8.0.15
-    container_name: survey_site_mysql
+    container_name: mysql
     restart: always
     environment:
       MYSQL_DATABASE: db_survey
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD:
     ports:
-      - ${MYSQL_PORT}:3306
+      - 3307:3306
     volumes:
       - ./mysql/init.sql:/data/application/init.sql
       - mysql_data:/var/lib/mysql
     networks:
       - webapp
-
+volumes:
+  mysql_data:

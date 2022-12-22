@@ -1,6 +1,6 @@
-FROM node:14.15.0
+FROM node:16.13.0
 
-WORKDIR /var/www
+WORKDIR /var/www/html/vue
 
 COPY package.json ./
 

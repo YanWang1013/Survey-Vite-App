@@ -3,7 +3,7 @@
  
 # How it looks
 
-![dashboard](https://user-images.githubusercontent.com/115689891/209037109-53643583-a157-49b1-92e2-45302c6a0efe.jpg)
+![dashboard](https://user-images.githubusercontent.com/115689891/209038803-d51c8096-2fde-4c76-8a72-f38c7a903e12.jpg)
 ![survey-edit](https://user-images.githubusercontent.com/115689891/209037148-9d9467f0-45cb-42d5-9726-21602605e295.jpg)
 ![public](https://user-images.githubusercontent.com/115689891/209037173-7d0cb1c0-7960-44c6-af70-4d1d8354db4a.jpg)
 ![surveys](https://user-images.githubusercontent.com/115689891/209037183-6c492710-e163-4e3c-8b36-c6ed6268b904.jpg)
